@@ -1,0 +1,26 @@
+
+cc_library(
+	name = "importsqlitelib",
+	srcs = [
+		"sqlite3.c",
+	],
+	hdrs = [
+		"config.h",
+		"include/sqlite3.h",
+	],
+	includes = [
+		"include",
+	],
+	copts = [
+		"-D_HAVE_SQLITE_CONFIG_H",
+		"-DBUILD_sqlite",
+		"-DSQLITE_THREADSAFE=1",
+		"-DSQLITE_ENABLE_MATH_FUNCTIONS",
+	],
+	linkopts = [
+		"-ldl",
+#		"-lm",
+#		"-lpthread",
+	],
+	visibility = ["//visibility:public"],
+)
