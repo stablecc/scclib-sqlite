@@ -23,6 +23,8 @@ make sqlite3.c
 
 ## licensing
 
-Source:
+Original source:
 * [BSD 3-Clause License](LICENSE)
-* [sqlite](sqlite.txt)
+
+External and redistributable:
+* [sqlite](lic/sqlite.txt)
