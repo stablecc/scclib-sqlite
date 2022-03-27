@@ -32,7 +32,8 @@ CPPFLAGS += -isystem $(BASE)/import/sqlite/sqlite \
 	-D_HAVE_SQLITE_CONFIG_H \
 	-DBUILD_sqlite \
 	-DSQLITE_THREADSAFE=1 \
-	-DSQLITE_ENABLE_MATH_FUNCTIONS
+	-DSQLITE_ENABLE_MATH_FUNCTIONS \
+	-DSQLITE_USE_URI
 
 NAME = importsqlite
 SRCS = sqlite3.c

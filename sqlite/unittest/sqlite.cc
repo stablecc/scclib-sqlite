@@ -52,8 +52,6 @@ struct SqliteTest : public testing::Test
 
 	SqliteTest() : db(nullptr)
 	{
-		sqlite3_config(SQLITE_CONFIG_URI, 1);
-
 		curdir = fs::get_current_dir();
 
 		system_error err;

@@ -1,0 +1,13 @@
+cc_test(
+	name = "sccsqliteunit",
+	size = "small",
+	srcs = [
+		"sqld.cc",
+	],
+	copts = ["-std=c++17"],
+	deps = [
+		"@com_google_googletest//:gtest_main",
+		"@com_stablecc_scclib_sqlite//:sccsqlitelib",
+		"@com_stablecc_scclib//util:sccutillib",
+	],
+)

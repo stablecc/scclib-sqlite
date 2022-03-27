@@ -12,13 +12,14 @@ cc_library(
 		"include",
 	],
 	copts = [
-		"-D_HAVE_SQLITE_CONFIG_H",
+		"-D_HAVE_SQLITE_CONFIG_H",	# the config file was set with a current linux + gcc compiler
 		"-DBUILD_sqlite",
-		"-DSQLITE_THREADSAFE=1",
+		"-DSQLITE_THREADSAFE=1",	# set to "serialized" threading mode
 		"-DSQLITE_ENABLE_MATH_FUNCTIONS",
+		"-DSQLITE_USE_URI",			# enables URI filenames
 	],
 	linkopts = [
-		"-ldl",
+		"-ldl",						# dlopen and friends
 #		"-lm",
 #		"-lpthread",
 	],

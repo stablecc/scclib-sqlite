@@ -1,0 +1,17 @@
+cc_library(
+	name = "sccsqlitelib",
+	srcs = [
+		"sqld.cc",
+	],
+	hdrs = [
+		"pub/sqlite/sqld.h",
+	],
+	includes = [
+		"pub",
+	],
+	copts = ["-std=c++17"],
+	deps = [
+		"@com_stablecc_scclib_sqlite//sqlite:importsqlitelib",
+	],
+	visibility = ["//visibility:public"],
+)

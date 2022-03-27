@@ -1,4 +1,14 @@
+\mainpage sqlite documentation
 # scclib sqlite library
+
+Provides c++ classes and library for [sqlite](https://www.sqlite.org/index.html).
+
+## sqlite c++ library
+
+Current documentation is available on
+[stablecc.github.io](https://stablecc.github.io/scclib-sqlite/).
+
+## sqlite source
 
 `sqlite3.h` and `sqlite3.c` are amalgamated [sqlite](https://github.com/sqlite/sqlite)
 source code, produced as follows:
