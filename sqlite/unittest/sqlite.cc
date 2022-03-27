@@ -37,6 +37,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <map>
 #include <util/fs.h>
 
+/** \addtogroup sqlite
+	@{ */
+/** Direct call tests for \ref sqlite \file */
+/** \example sqlite/unittest/sqld.cc */
+/** @} */
+
 using std::cout;
 using std::endl;
 using std::string;
