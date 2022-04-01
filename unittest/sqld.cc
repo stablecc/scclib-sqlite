@@ -105,7 +105,7 @@ TEST_F(SqliteTest, memory_conn)
 
 TEST_F(SqliteTest, file_open)
 {
-	reopen("file:file?mode=rwc");	// open a read/write/create file backed connection
+	reopen("file:dbfile?mode=rwc");	// open a read/write/create file backed connection
 	auto fs = fs::scan_dir(".");
 	cout << "filesystem:" << endl;
 	for (auto& d : fs)
@@ -114,7 +114,7 @@ TEST_F(SqliteTest, file_open)
 	}
 	ASSERT_EQ(fs.size(), 1);
 	system_error err;
-	ASSERT_TRUE(fs::file_stat("file", &err).type == scc::util::FileType::reg);
+	ASSERT_TRUE(fs::file_stat("dbfile", &err).type == scc::util::FileType::reg);
 }
 
 TEST_F(SqliteTest, exec_select)
@@ -158,7 +158,7 @@ TEST_F(SqliteTest, exec_select)
 
 TEST_F(SqliteTest, exec)
 {
-	reopen("file:file?mode=rwc");
+	reopen("file:dbfile?mode=rwc");
 	Req req(db);
 
 	int64_t big = 1;
@@ -203,7 +203,7 @@ TEST_F(SqliteTest, blob)
 
 TEST_F(SqliteTest, two_conns_xact)
 {
-	reopen("file:file?mode=rwc");
+	reopen("file:dbfile?mode=rwc");		// first connection is read/write/create
 	
 	Req r(db);
 
@@ -212,14 +212,17 @@ TEST_F(SqliteTest, two_conns_xact)
 
 	Trans x(db);
 
+	ASSERT_FALSE(x.is_active());
+
 	x.begin();										// begin a transaction
+	ASSERT_TRUE(x.is_active());
 	r.clear();
 	r.sql()	<< "insert into t values(12345);";
 	r.exec();										// insert a value
 
-	Conn db2("file:file?mode=rwc");		// second connection
+	Conn db2("file:dbfile?mode=ro");		// second connection is read-only
 
-	Req r2(db2);
+	Req r2(db2);						// request on second connection
 
 	r2.sql() << "select * from t;";
 
@@ -227,7 +230,7 @@ TEST_F(SqliteTest, two_conns_xact)
 
 	x.commit();							// first connection commits transaction
 
-	r2.reset();
+	r2.reset();							// reuse the sql stream request
 
 	ASSERT_EQ(r2.exec_select(), 1);		// now the value can be seen
 
@@ -235,7 +238,7 @@ TEST_F(SqliteTest, two_conns_xact)
 	r.clear();
 	r.sql()	<< "insert into t values(45678);";
 	r.exec();
-	x.abort();
+	x.abort();							// throw away this transaction
 
 	r.clear();
 	r.sql() << "select * from t where a is 45678;";

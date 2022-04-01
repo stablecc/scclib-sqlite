@@ -82,7 +82,7 @@ public:
 	void reopen(const std::string& = "file:mem?mode=memory&cache=shared");
 };
 
-/** Database transaction helper.
+/** Database transaction.
 
 	An active transaction will be aborted when the object is destroyed.
 */
@@ -94,9 +94,26 @@ public:
 	Trans(Conn&);
 	virtual ~Trans();
 
+	/** BEGIN the transaction.
+
+		Throws an exception if the transaction is already active.
+	*/
 	void begin();
+	
+	/** COMMIT the transaction.
+
+		Throws an exception if the transaction is not active.
+	*/
 	void commit();
+	
+	/** ROLLBACK (abort) the transaction.
+
+		Throws an exception if the transaction is not active.
+	*/
 	void abort();
+
+	/** Is this transaction active? */
+	bool is_active() const { return m_active; }
 };
 
 /** Database request.
@@ -123,15 +140,16 @@ public:
 	Req(Conn&);
 	virtual ~Req();
 
-	/** Clear the request.
+	/** Clear the request and the sql() stream.
 
-		After this call, the sql stream is set empty, and the request is initialized.
+		After this call, the sql() stream is set empty, and the request is initialized.
 	*/
 	void clear();
 
-	/** Reset the request.
+	/** Reset the request without clearing the sql() stream.
 
-		After this call, the sql stream is unchanged, and the request is initailized.
+		After this call, the sql() stream is unchanged, and the request is initialized to start of stream.
+		The sql stream can then be executed again.
 	*/
 	void reset();
 
