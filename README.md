@@ -6,7 +6,7 @@ Provides c++ classes and library for [sqlite](https://www.sqlite.org/index.html)
 ## sqlite c++ library
 
 Current documentation is available on
-[stablecc.github.io](https://stablecc.github.io/scclib-sqlite/).
+[stablecc.github.io](https://stablecc.github.io/scclib-sqlite-doxygen/).
 
 ## sqlite source
 
