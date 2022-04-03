@@ -114,7 +114,7 @@ TEST_F(SqliteTest, file_open)
 	}
 	ASSERT_EQ(fs.size(), 1);
 	system_error err;
-	ASSERT_TRUE(fs::file_stat("dbfile", &err).type == scc::util::FileType::reg);
+	ASSERT_EQ(fs::file_stat("dbfile", &err).type, scc::util::FileType::reg);
 }
 
 TEST_F(SqliteTest, exec_select)
@@ -243,4 +243,9 @@ TEST_F(SqliteTest, two_conns_xact)
 	r.clear();
 	r.sql() << "select * from t where a is 45678;";
 	ASSERT_EQ(r.exec_select(), 0);						// it was rolled back
+
+
+	r2.clear();
+	r2.sql()	<< "insert into t values(45678);";
+	ASSERT_THROW(r2.exec(), runtime_error);				// illegal for read-only db connection
 }
