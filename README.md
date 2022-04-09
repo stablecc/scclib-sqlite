@@ -29,3 +29,4 @@ Original source:
 External and redistributable:
 * [sqlite](lic/sqlite.txt)
 * [googletest](lic/google.txt)
+* [bazel (google)](lic/bazel.txt)
