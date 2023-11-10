@@ -29,9 +29,9 @@
 ifndef SCCLIB_IMPORT_SQLITE
 SCCLIB_IMPORT_SQLITE := 1
 
-BLDLIBS += $(BASE)/import/sqlite/sqlite 
+BLDLIBS += $(BASE)/scclib-sqlite/sqlite 
 
-CPPFLAGS += -isystem $(BASE)/import/sqlite/sqlite/include
+CPPFLAGS += -isystem $(BASE)/scclib-sqlite/sqlite/include
 
 ifeq ($(BLDTYPE),debug)
 SLIBS := -limportsqlited $(SLIBS)

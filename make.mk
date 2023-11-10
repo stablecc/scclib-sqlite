@@ -29,11 +29,11 @@
 ifndef SCCLIB_SQLITE
 SCCLIB_SQLITE := 1
 
-BLDLIBS += $(BASE)/import/sqlite
+BLDLIBS += $(BASE)/scclib-sqlite
 
-CPPFLAGS += -isystem $(BASE)/import/sqlite/pub
+CPPFLAGS += -isystem $(BASE)/scclib-sqlite/pub
 
-include $(BASE)/import/sqlite/sqlite/make.mk
+include $(BASE)/scclib-sqlite/sqlite/make.mk
 
 ifeq ($(BLDTYPE),debug)
 SLIBS := -lsccsqlited $(SLIBS)
