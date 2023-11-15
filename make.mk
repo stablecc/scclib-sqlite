@@ -31,7 +31,7 @@ SCCLIB_SQLITE := 1
 
 BLDLIBS += $(BASE)/scclib-sqlite
 
-CPPFLAGS += -isystem $(BASE)/scclib-sqlite/pub
+CPPFLAGS += -I $(BASE)/scclib-sqlite/pub
 
 include $(BASE)/scclib-sqlite/sqlite/make.mk
 

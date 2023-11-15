@@ -28,7 +28,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 BASE = ../..
 
-CPPFLAGS += -isystem $(BASE)/import/sqlite/sqlite \
+CPPFLAGS += -I $(BASE)/import/sqlite/sqlite \
 	-D_HAVE_SQLITE_CONFIG_H \
 	-DBUILD_sqlite \
 	-DSQLITE_THREADSAFE=1 \
